@@ -36,7 +36,7 @@ public class Class01 {
         List<WebElement> element_solve;
         String URL_WEBSITE = "https://ttsfree.com/vn";
         String user_name = "nam02test";
-        String user_password = "IUtrangmaimai02";
+        String user_password = "Password123";
         String male_voice = "//*[@id=\"voice_name_bin\"]/div[2]/label";
         String female_voice = "//*[@id=\"voice_name_bin\"]/div[1]/label";
         String fileName;
