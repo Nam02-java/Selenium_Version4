@@ -83,8 +83,6 @@ public class Class01 {
             System.out.println(e);
         }
 
-        driver.switchTo().defaultContent(); // return default content
-         
         driver.findElement(By.xpath("(//a[@class='link mr-20 color-heading ml-10'])[1]")).click(); // click login
 
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -104,8 +102,6 @@ public class Class01 {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        driver.switchTo().defaultContent(); // return default content
 
         driver.findElement(By.xpath("//input[@name='txt_username']")).sendKeys(user_name);
         driver.findElement(By.xpath("//input[@name='txt_password']")).sendKeys(user_password);
@@ -141,6 +137,7 @@ public class Class01 {
                 WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
                 driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
+                driver.switchTo().defaultContent(); // return default content
             }
         } catch (Exception exception) {
             System.out.println("Không hiển thị bàn tay quảng cáo ở lần check 1");
@@ -167,6 +164,7 @@ public class Class01 {
                 WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
                 driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
+                driver.switchTo().defaultContent(); // return default content
             }
         } catch (Exception exception) {
             System.out.println("Không hiển thị bàn tay quảng cáo ở lần check 2");
@@ -199,6 +197,7 @@ public class Class01 {
                 WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
                 driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
+                driver.switchTo().defaultContent(); // return default content        
             }
         } catch (Exception exception) {
             System.out.println("Không hiển thị bàn tay quảng cáo ở lần check 3");
