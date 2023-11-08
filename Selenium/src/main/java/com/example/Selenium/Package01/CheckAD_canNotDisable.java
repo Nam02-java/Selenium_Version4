@@ -36,6 +36,7 @@ public class CheckAD_canNotDisable implements Runnable {
                 WebElement frame = driver.findElement(By.xpath("//div[@id='ad_position_box']"));
                 driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
+                driver.switchTo().defaultContent(); // return default content        
             }
             countDownLatch.countDown();
         } catch (Exception exception) {
