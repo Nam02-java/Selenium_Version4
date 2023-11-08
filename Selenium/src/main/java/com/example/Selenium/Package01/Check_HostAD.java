@@ -24,7 +24,7 @@ public class Check_HostAD implements Runnable {
         this.countDownLatch = countDownLatch;
     }
 
-    @Override
+  @Override
     public void run() {
         try { // quảng cáo host 8 9
             System.out.println("Xem xét quảng cáo của host ");
@@ -34,16 +34,8 @@ public class Check_HostAD implements Runnable {
                 System.out.println("Quảng của host có hiển thị ");
                 WebElement frame1 = driver.findElement(By.xpath("//iframe[contains(@style,'width: 100vw')]"));
                 driver.switchTo().frame(frame1);
-                List<WebElement> list = driver.findElements(By.xpath("//div[@aria-label='Đóng quảng cáo']"));
-                if (list.size() > 0) {
-                    driver.findElement(By.xpath("//div[@aria-label='Đóng quảng cáo']")).click();
-                    System.out.println("click after aria label");
-                }
-                list = driver.findElements(By.xpath("//div[@class='ns-wusx3-e-19 button-common close-button]"));
-                if (list.size() > 0) {
-                    driver.findElement(By.xpath("//div[@class='ns-wusx3-e-19 button-common close-button]")).click();
-                    System.out.println("click after button common");
-                }
+                driver.findElement(By.xpath("//div[@aria-label='Đóng quảng cáo']")).click();
+                System.out.println("da tat host");
             }
             countDownLatch.countDown();
         } catch (Exception exception) {
@@ -52,3 +44,27 @@ public class Check_HostAD implements Runnable {
         }
     }
 }
+
+//    @Override
+//    public void run() {
+//        try { // quảng cáo host 8 9
+//            System.out.println("Xem xét quảng cáo của host ");
+//            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//iframe[contains(@style,'width: 100vw')]")));
+//            element_solve = driver.findElements(By.xpath("//iframe[contains(@style,'width: 100vw')]"));
+//            if (element_solve.size() > 0 && element_solve.get(0).isDisplayed()) {
+//                System.out.println("Quảng của host có hiển thị ");
+//                WebElement frame1 = driver.findElement(By.xpath("//iframe[contains(@style,'width: 100vw')]"));
+//                driver.switchTo().frame(frame1);
+//                List<WebElement> list = driver.findElements(By.xpath("//div[@aria-label='Đóng quảng cáo']"));
+//                if (list.size() > 0) {
+//                    driver.findElement(By.xpath("//div[@aria-label='Đóng quảng cáo']")).click();
+//                    System.out.println("da tat host");
+//                }
+//            }
+//            countDownLatch.countDown();
+//        } catch (Exception exception) {
+//            countDownLatch.countDown();
+//            System.out.println("Không hiển thị quảng cáo của host ");
+//        }
+//    }
+//}
