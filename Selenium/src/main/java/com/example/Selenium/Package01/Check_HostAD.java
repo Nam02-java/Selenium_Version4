@@ -36,6 +36,7 @@ public class Check_HostAD implements Runnable {
                 driver.switchTo().frame(frame1);
                 driver.findElement(By.xpath("//div[@aria-label='Đóng quảng cáo']")).click();
                 System.out.println("da tat host");
+                driver.switchTo().defaultContent(); // return default content        
             }
             countDownLatch.countDown();
         } catch (Exception exception) {
