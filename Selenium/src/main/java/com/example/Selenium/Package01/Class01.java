@@ -30,7 +30,7 @@ import java.util.concurrent.*;
 @RequestMapping("/api/web")
 public class Class01 {
 
-     @GetMapping("/ttsfree_captcha_noForLoop_thread")
+         @GetMapping("/ttsfree_captcha_noForLoop_thread")
     public ResponseEntity<?> ttsfree_captcha_noForLoop_Threads(@RequestParam Map<String, String> params) throws InterruptedException, IOException {
         WebDriverWait wait;
         List<WebElement> element_solve;
@@ -62,7 +62,7 @@ public class Class01 {
 
         driver.get(URL_WEBSITE);
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         CountDownLatch latch = new CountDownLatch(4); // sum = 4
 
         Thread threadESC = new Thread(new Check_ESC(driver, wait, latch));
@@ -84,9 +84,10 @@ public class Class01 {
         }
 
         driver.switchTo().defaultContent(); // return default content
+         
         driver.findElement(By.xpath("(//a[@class='link mr-20 color-heading ml-10'])[1]")).click(); // click login
 
-        wait = new WebDriverWait(driver, Duration.ofSeconds(6));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         latch = new CountDownLatch(4); // sum = 4
         threadESC = new Thread(new Check_ESC(driver, wait, latch));
         threadHandAD = new Thread(new Check_HandAD(driver, wait, latch));
@@ -103,6 +104,8 @@ public class Class01 {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        driver.switchTo().defaultContent(); // return default content
 
         driver.findElement(By.xpath("//input[@name='txt_username']")).sendKeys(user_name);
         driver.findElement(By.xpath("//input[@name='txt_password']")).sendKeys(user_password);
@@ -128,17 +131,19 @@ public class Class01 {
             }
         }
 
-        try { //bàn tay quảng cáo
+        try { //bàn tay quảng cáo lần 1
             wait = new WebDriverWait(driver, Duration.ofSeconds(1));
             System.out.println("Xem xét quảng cáo bàn tay lần 1");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@aria-modal='true']")));
             element_solve = driver.findElements(By.xpath("//div[@aria-modal='true']"));
             if (element_solve.size() > 0 && element_solve.get(0).isDisplayed()) {
-                System.out.println("Bàn tay quảng cáo bàn tay có hiển thị lần 1");
+                System.out.println("Bàn tay quảng cáo có hiển thị ở lần check 1");
+                WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
+                driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
             }
         } catch (Exception exception) {
-            System.out.println("Không hiển thị bàn tay quảng cáo lần 1");
+            System.out.println("Không hiển thị bàn tay quảng cáo ở lần check 1");
         }
 
         js = (JavascriptExecutor) driver; // work
@@ -152,17 +157,19 @@ public class Class01 {
         driver.findElement(By.xpath("//*[@id=\"input_text\"]")).clear();
         driver.findElement(By.xpath("//*[@id=\"input_text\"]")).sendKeys(text);
 
-        try { //bàn tay quảng cáo
+        try { //bàn tay quảng cáo lần 2
             wait = new WebDriverWait(driver, Duration.ofSeconds(1));
-            System.out.println("Xem xét quảng cáo bàn tay sau khi gửi text");
+            System.out.println("Xem xét quảng cáo bàn tay lần 2");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@aria-modal='true']")));
             element_solve = driver.findElements(By.xpath("//div[@aria-modal='true']"));
             if (element_solve.size() > 0 && element_solve.get(0).isDisplayed()) {
-                System.out.println("Bàn tay quảng cáo bàn tay có hiển thị sau khi gửi text");
+                System.out.println("Bàn tay quảng cáo có hiển thị ở lần check 2");
+                WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
+                driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
             }
         } catch (Exception exception) {
-            System.out.println("Không hiển thị bàn tay quảng cáo sau khi gửi text");
+            System.out.println("Không hiển thị bàn tay quảng cáo ở lần check 2");
         }
 
         if (driver.findElement(By.xpath("//*[@id=\"select2-select_lang_bin-container\"]")).getText().equals(xpath_vietnameseToText)) {
@@ -182,17 +189,19 @@ public class Class01 {
 
         driver.findElement(By.xpath("//*[@id=\"frm_tts\"]/div[2]/div[2]/div[1]/a")).click();
 
-        try { //bàn tay quảng cáo
+        try { //bàn tay quảng cáo lần 3
             wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-            System.out.println("Xem xét quảng cáo bàn tay lần 2");
+            System.out.println("Xem xét quảng cáo bàn tay lần 3");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@aria-modal='true']")));
             element_solve = driver.findElements(By.xpath("//div[@aria-modal='true']"));
             if (element_solve.size() > 0 && element_solve.get(0).isDisplayed()) {
-                System.out.println("Bàn tay quảng cáo bàn tay có hiển thị lần 2");
+                System.out.println("Bàn tay quảng cáo có hiển thị ở lần check 3");
+                WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
+                driver.switchTo().frame(frame);
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
             }
         } catch (Exception exception) {
-            System.out.println("Không hiển thị bàn tay quảng cáo lần 2");
+            System.out.println("Không hiển thị bàn tay quảng cáo ở lần check 3");
         }
 
         try {
@@ -323,4 +332,3 @@ public class Class01 {
         return ResponseEntity.ok(new String("END GAME"));
     }
 }
-
