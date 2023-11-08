@@ -28,20 +28,19 @@ public class CheckAD_canNotDisable implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println("check //div[@id='ad_position_box']");
+            System.out.println("Xem xét //div[@id='ad_position_box']");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='ad_position_box']")));
             element_solve = driver.findElements(By.xpath("//div[@id='ad_position_box']"));
             if (element_solve.size() > 0 && element_solve.get(0).isDisplayed()) {
-                System.out.println("display with //div[@id='ad_position_box']");
-                driver.findElement(By.xpath("//div[@id='ad_position_box']")).click();
-                System.out.println("//div[@id='ad_position_box'] Clicked");
-                driver.navigate().back();
-                driver.findElement(By.xpath("(//a[@class='link mr-20 color-heading ml-10'])[1]")).click();
+                System.out.println("Có hiển thị //div[@id='ad_position_box']");
+                WebElement frame = driver.findElement(By.xpath("//div[@id='ad_position_box']"));
+                driver.switchTo().frame(frame);
+                driver.findElement(By.xpath("//div[@id='dismiss-button']")).click();
             }
             countDownLatch.countDown();
         } catch (Exception exception) {
             countDownLatch.countDown();
-            System.out.println("non display with //div[@id='ad_position_box']");
+            System.out.println("Không hiển thị //div[@id='ad_position_box']");
         }
     }
 }
