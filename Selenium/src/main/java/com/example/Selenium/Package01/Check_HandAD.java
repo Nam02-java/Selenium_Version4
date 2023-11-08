@@ -24,22 +24,26 @@ public class Check_HandAD implements Runnable {
         this.countDownLatch = countDownLatch;
     }
 
-    @Override
+      @Override
     public void run() {
         try { //bàn tay quảng cáo
             System.out.println("Xem xét quảng cáo bàn tay");
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@aria-modal='true']")));
             element_solve = driver.findElements(By.xpath("//div[@aria-modal='true']"));
             if (element_solve.size() > 0 && element_solve.get(0).isDisplayed()) {
-                System.out.println("Bàn tay quảng cáo bàn tay có hiển thị");
+                System.out.println("Bàn tay quảng cáo có hiển thị");
+                WebElement frame = driver.findElement(By.xpath("//div[@aria-modal='true']"));
+                System.out.println("copy web element thanh cong");
+                driver.switchTo().frame(frame);
+                System.out.println("swtich frame thanh cong");
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
+                System.out.println("da tat ad hand");
             }
             countDownLatch.countDown();
         } catch (Exception exception) {
             countDownLatch.countDown();
             System.out.println("Không hiển thị bàn tay quảng cáo");
         }
-
     }
 }
 
