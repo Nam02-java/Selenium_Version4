@@ -38,6 +38,7 @@ public class Check_HandAD implements Runnable {
                 System.out.println("swtich frame thanh cong");
                 driver.findElement(By.xpath("//button[@aria-label='Close this dialog']")).click();
                 System.out.println("da tat ad hand");
+                driver.switchTo().defaultContent(); // return default content        
             }
             countDownLatch.countDown();
         } catch (Exception exception) {
